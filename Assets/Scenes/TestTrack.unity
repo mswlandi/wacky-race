@@ -202,7 +202,37 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 454612283451302814}
-  m_RootOrder: 2
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &178999878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 178999879}
+  m_Layer: 0
+  m_Name: CenterOfMass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &178999879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178999878}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 454612283451302814}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &329946282
 GameObject:
@@ -356,7 +386,7 @@ Transform:
   - {fileID: 1220332738}
   - {fileID: 1534711758}
   m_Father: {fileID: 454612283451302814}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1220332737
 GameObject:
@@ -745,9 +775,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 32837143}
   - {fileID: 6182949481330660198}
   - {fileID: 853768942}
-  - {fileID: 32837143}
+  - {fileID: 178999879}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -782,6 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5824760787f33214db941d910e571e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  centerOfMass: {fileID: 178999879}
   wheelColliderLeftFront: {fileID: 1397031089}
   wheelColliderRightFront: {fileID: 329946284}
   wheelColliderLeftBack: {fileID: 745039707}
@@ -1006,7 +1038,6 @@ GameObject:
   - component: {fileID: 1107063620849442025}
   - component: {fileID: 2098217686528756019}
   - component: {fileID: 1170831787451815098}
-  - component: {fileID: 3751411691692821905}
   m_Layer: 0
   m_Name: WheelRightFront
   m_TagString: Untagged
@@ -1014,19 +1045,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3751411691692821905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3751411691692821904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bc77804fd7975a438e116b184e947f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correspondingCollider: {fileID: 329946284}
 --- !u!23 &4172001991347508554
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1091,7 +1109,6 @@ GameObject:
   - component: {fileID: 9034858586563070582}
   - component: {fileID: 1018665589028651809}
   - component: {fileID: 4172001991347508554}
-  - component: {fileID: 5651390992539658994}
   m_Layer: 0
   m_Name: WheelLeftBack
   m_TagString: Untagged
@@ -1099,19 +1116,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5651390992539658994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5651390992539658993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bc77804fd7975a438e116b184e947f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correspondingCollider: {fileID: 745039707}
 --- !u!33 &5920961872885291024
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1132,7 +1136,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 454612283451302814}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6185221839847144810
 Transform:
@@ -1167,7 +1171,6 @@ GameObject:
   - component: {fileID: 4879762566056408660}
   - component: {fileID: 1493890716369955849}
   - component: {fileID: 1925682400296789390}
-  - component: {fileID: 8400675983478105457}
   m_Layer: 0
   m_Name: WheelLeftFront
   m_TagString: Untagged
@@ -1175,19 +1178,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8400675983478105457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8400675983478105456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bc77804fd7975a438e116b184e947f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correspondingCollider: {fileID: 1397031089}
 --- !u!1 &8429644415725053389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,7 +1189,6 @@ GameObject:
   - component: {fileID: 6185221839847144810}
   - component: {fileID: 5920961872885291024}
   - component: {fileID: 3133803223063867539}
-  - component: {fileID: 8429644415725053390}
   m_Layer: 0
   m_Name: WheelRightBack
   m_TagString: Untagged
@@ -1207,19 +1196,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8429644415725053390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8429644415725053389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bc77804fd7975a438e116b184e947f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  correspondingCollider: {fileID: 1914193399}
 --- !u!23 &8659968740297281800
 MeshRenderer:
   m_ObjectHideFlags: 0

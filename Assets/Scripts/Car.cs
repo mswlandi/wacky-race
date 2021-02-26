@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
+    private Rigidbody _rigidbody;
+    
+    public Transform centerOfMass;
+
     public WheelCollider wheelColliderLeftFront;
     public WheelCollider wheelColliderRightFront;
     public WheelCollider wheelColliderLeftBack;
@@ -17,6 +21,12 @@ public class Car : MonoBehaviour
     public float motorTorque = 100f;
     public float maxSteer = 20f;
     public float brakeTorque = 20f;
+
+    void Start()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.centerOfMass = centerOfMass.localPosition;
+    }
 
     void FixedUpdate()
     {
@@ -43,6 +53,18 @@ public class Car : MonoBehaviour
 
         wheelColliderLeftFront.GetWorldPose(out pos, out rot);
         wheelLeftFront.position = pos;
-        wheelLeftFront.rotation = rot * Quaternion.Euler(0, 180, 0);
+        wheelLeftFront.rotation = rot * Quaternion.Euler(0, 90, 90);
+
+        wheelColliderRightFront.GetWorldPose(out pos, out rot);
+        wheelRightFront.position = pos;
+        wheelRightFront.rotation = rot * Quaternion.Euler(0, 90, 90);
+
+        wheelColliderLeftBack.GetWorldPose(out pos, out rot);
+        wheelLeftBack.position = pos;
+        wheelLeftBack.rotation = rot * Quaternion.Euler(0, 90, 90);
+
+        wheelColliderRightBack.GetWorldPose(out pos, out rot);
+        wheelRightBack.position = pos;
+        wheelRightBack.rotation = rot * Quaternion.Euler(0, 90, 90);
     }
 }
