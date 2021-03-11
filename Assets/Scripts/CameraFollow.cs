@@ -5,8 +5,8 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform target;
-	public float distance = 20.0f;
-	public float height = 5.0f;
+	public float distance = 8.0f;
+	public float height = 2.0f;
 	public float heightDamping = 2.0f;
  
 	public float lookAtHeight = 0.0f;
