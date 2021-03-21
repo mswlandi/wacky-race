@@ -48,4 +48,4 @@ sysinfo.txt
 crashlytics-build.properties
 
 # Blender
-.blend1
+*.blend1
