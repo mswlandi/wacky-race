@@ -387,8 +387,9 @@ GameObject:
   - component: {fileID: 1299685116558724661}
   - component: {fileID: 1820219606840120461}
   - component: {fileID: 1820219606840120462}
+  - component: {fileID: 1245750410}
   m_Layer: 0
-  m_Name: RedCar 1
+  m_Name: RedCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -401,7 +402,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820219606840120463}
-  m_LocalRotation: {x: 0.00010626613, y: 0.99931914, z: 0.0028871812, w: -0.03678116}
+  m_LocalRotation: {x: 0.00010625046, y: 0.99931914, z: 0.0028866143, w: -0.036782928}
   m_LocalPosition: {x: 49.6, y: 4.15, z: 27.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -443,6 +444,33 @@ MonoBehaviour:
   centerOfMass: {fileID: 1460982451946389484}
   motorTorque: 1500
   maxSteer: 50
+--- !u!114 &1245750410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820219606840120463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9cd07882550834a913fa746530ecd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPointArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  Lap: 0
+  NextCheckpoint: 0
 --- !u!1 &2326604822677397563
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +562,7 @@ GameObject:
   - component: {fileID: 3513175297676895973}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
