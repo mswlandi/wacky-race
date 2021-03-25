@@ -9,6 +9,7 @@ public class InputController : MonoBehaviour
 
     public float ThrottleInput { get; set; }
     public float SteerInput { get; set; }
+    public bool BrakeInput { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -21,5 +22,6 @@ public class InputController : MonoBehaviour
     {
         SteerInput = Input.GetAxis(inputSteerAxis);
         ThrottleInput = Input.GetAxis(inputThrottleAxis);
+        BrakeInput = Input.GetKey(KeyCode.Space);
     }
 }
