@@ -14,12 +14,20 @@ public class Car : MonoBehaviour
     private float steer;
     private float throttle;
 
-    public float Steer { 
+    public Vector3 Position 
+    {
+        get { return transform.position; }
+        set { transform.position = value; }
+    }
+
+    public float Steer 
+    { 
         get { return steer; }
         set { steer = Mathf.Min(1, Mathf.Max(-1, value)); } 
     }
 
-    public float Throttle { 
+    public float Throttle 
+    { 
         get { return throttle; }
         set { throttle = Mathf.Min(1, Mathf.Max(-1, value)); } 
     }

@@ -10,24 +10,32 @@ public class AICarController : CarController
     public Checkpoints checkpoints;
     private int currentCheckpoint;
 
-    private Vector3 targetPosition;
-    private Transform targetPositionTransform;
-
     public override void Update()
     {
-        SetTargetPosition(checkpoints.Transforms[currentCheckpoint]);
+        if (DriveTo(checkpoints.Transforms[currentCheckpoint]))
+        {
+            IncrementCheckpoint();
+        }
+    }
+
+    private bool DriveTo(Transform targetTransform)
+    {
+        bool alreadyReached = false;
 
         float forwardAmount = 0f;
         float turnAmount = 0f;
         bool shouldBreak = false;
 
+        Vector3 targetPosition = targetTransform.position;
         float distanceToTarget = Vector3.Distance(car.transform.position, targetPosition);
         float distanceFromCurrentToNextCheckpoint = Vector3.Distance(targetPosition, checkpoints.Transforms[(currentCheckpoint + 1) % checkpoints.Transforms.Length].position);
         Vector3 dirToMovePosition = (targetPosition - car.transform.position).normalized;
-        float dot = Vector3.Dot(-targetPositionTransform.forward, dirToMovePosition);
+        float dot = Vector3.Dot(-targetTransform.forward, dirToMovePosition);
         float angleToDir = Vector3.SignedAngle(car.transform.forward, dirToMovePosition, Vector3.up);
 
-        if (distanceToTarget > reachedTargetDistanceThreshold)
+        alreadyReached = distanceToTarget <= reachedTargetDistanceThreshold;
+
+        if (!alreadyReached)
         {
             if (dot > 0)
             {
@@ -40,19 +48,16 @@ public class AICarController : CarController
 
             turnAmount = angleToDir / 180;
         }
-        else
-        {
-            currentCheckpoint = (currentCheckpoint + 1) % checkpoints.Transforms.Length;
-        }
         
         car.Throttle = forwardAmount * (distanceFromCurrentToNextCheckpoint / checkpointsDistanceThreshold);
         car.Steer = turnAmount;
         car.ShouldBrake = shouldBreak;
+
+        return alreadyReached;
     }
 
-    public void SetTargetPosition(Transform targetTransform)
+    private void IncrementCheckpoint()
     {
-        this.targetPositionTransform = targetTransform;
-        this.targetPosition = targetTransform.position;
+        currentCheckpoint = (currentCheckpoint + 1) % checkpoints.Transforms.Length;
     }
 }
