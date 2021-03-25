@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1142304399995184958}
   - component: {fileID: 1142304399995184953}
   - component: {fileID: 1142304399995184957}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RightFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 7316857406623366494}
   - component: {fileID: 6497728486298709354}
   - component: {fileID: 1831752476538366133}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Plunger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,8 +171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6347b5aa3742cc242acad221e6f688ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  crosshair: {fileID: 0}
   rotationSnapTime: 0.2
+  minScale: 0.4
+  maxScale: 2
+  maxScaleAtDistance: 0
+  minScaleAtDistance: 20
 --- !u!1 &1870930570973919852
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +188,7 @@ GameObject:
   - component: {fileID: 6962431213958395654}
   - component: {fileID: 4154054030872416427}
   - component: {fileID: 6032713721214970849}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlungerUpDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +268,7 @@ GameObject:
   - component: {fileID: 3451150744353187966}
   - component: {fileID: 6675937331493626153}
   - component: {fileID: 7738128510806947650}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +347,7 @@ GameObject:
   - component: {fileID: 2770851762796621228}
   - component: {fileID: 2770851762796621229}
   - component: {fileID: 2770851762796621216}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RightBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +425,7 @@ GameObject:
   - component: {fileID: 38091153488457596}
   - component: {fileID: 1352234456391596710}
   - component: {fileID: 2298496631105103663}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,7 +503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5146500729019572013}
   - component: {fileID: 5146500729019572050}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -545,7 +549,7 @@ GameObject:
   - component: {fileID: 3901535043208578938}
   - component: {fileID: 1059169791122900993}
   - component: {fileID: 2001099170477360404}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -624,7 +628,7 @@ GameObject:
   - component: {fileID: 8469066211087163230}
   - component: {fileID: 5851313805421442740}
   - component: {fileID: 5311718116896556881}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlungerRotate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,7 +708,7 @@ GameObject:
   - component: {fileID: 5946641933906314578}
   - component: {fileID: 5946641933906314579}
   - component: {fileID: 5946641933906314590}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -782,7 +786,7 @@ GameObject:
   - component: {fileID: 6654625676539363498}
   - component: {fileID: 6654625676539363501}
   - component: {fileID: 6654625676539363497}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -860,7 +864,7 @@ GameObject:
   - component: {fileID: 4998733298088959920}
   - component: {fileID: 4185494567475612587}
   - component: {fileID: 7157250027325813099}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlungerStick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -937,7 +941,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7199908593203326706}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -971,7 +975,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7199908594146510427}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CenterOfMass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1003,7 +1007,7 @@ GameObject:
   - component: {fileID: 6563520348180136064}
   - component: {fileID: 2906805328162982359}
   - component: {fileID: 2274853599107620796}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1082,7 +1086,7 @@ GameObject:
   - component: {fileID: 5982168665951635688}
   - component: {fileID: 4703912048239910194}
   - component: {fileID: 5505188222205231291}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1163,8 +1167,8 @@ GameObject:
   - component: {fileID: 7993886461908577593}
   - component: {fileID: 7993886461908577591}
   - component: {fileID: 8623625229567384893}
-  m_Layer: 0
-  m_Name: RedCar
+  m_Layer: 11
+  m_Name: BotCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1235,9 +1239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c5789f9ba9908459be908dda91a076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steerThreshold: 1
-  distanceThreshold: 7
-  speedAfterCatchThreshold: 15
+  reachedTargetDistanceThreshold: 7
+  checkpointsDistanceThreshold: 150
   checkpoints: {fileID: 0}
 --- !u!114 &8623625229567384893
 MonoBehaviour:
@@ -1251,18 +1254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e9cd07882550834a913fa746530ecd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkPointArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  checkpoints: {fileID: 0}
   startPos: {x: 0, y: 0, z: 0}
   Lap: 0
   NextCheckpoint: 0

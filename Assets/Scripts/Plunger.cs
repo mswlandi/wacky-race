@@ -5,15 +5,17 @@ using UnityEngine;
 public class Plunger : MonoBehaviour
 {
 
-    public Transform target;
     public RectTransform crosshair;
     public float rotationSnapTime = 0.2F;
 
-    public float minScale = 0.4f; // dummy values are examples
+    public float minScale = 0.4f;
     public float maxScale = 2f;
     public float maxScaleAtDistance = 0;
     public float minScaleAtDistance = 20;
 
+    public int enemiesLayerMask = 11;
+
+    private Transform target;
     private Transform lookAtVector;
     private float yVelocity = 0.0F;
     private float xVelocity = 0.0F;
@@ -32,6 +34,10 @@ public class Plunger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #region Find Target
+        SetTargetCloserInFront();
+        #endregion
+
         #region Look-At Rotations
         rotatableBase = transform.GetChild(0);
         rotatableArm = rotatableBase.GetChild(0);
@@ -43,7 +49,7 @@ public class Plunger : MonoBehaviour
         rotatableArm.eulerAngles = new Vector3(Mathf.SmoothDampAngle(rotatableArm.eulerAngles.x, targetRotation.eulerAngles.x, ref xVelocity, rotationSnapTime), 180 + rotatableBase.eulerAngles.y, 0);
         #endregion
 
-
+        #region Make Cross-Hair Follow target
         crosshair.position = Camera.main.WorldToScreenPoint(target.position);
         
         if (Camera.main.WorldToScreenPoint(target.position).z > 0)
@@ -58,45 +64,51 @@ public class Plunger : MonoBehaviour
         {
             crosshair.localScale = new Vector3(0, 0, 0);
         }
+        #endregion
     }
 
-    public Vector2 positivateVec2(Vector2 v)
+    public bool SetTargetCloserInFront()
     {
-        return new Vector2(Mathf.Abs(v.x), Mathf.Abs(v.y));
-    }
+        int layerMask = 1 << enemiesLayerMask;
 
-    public Vector2 vec2Div(Vector2 v1, Vector2 v2)
-    {
-        return new Vector2(v1.x/v2.x, v1.y/v2.y);
-    }
+        Collider[] CloseColliders = Physics.OverlapSphere (transform.position, 1000, layerMask);
+        float sqrMinDistance = 100000;
+        Transform ret = target;
 
-    // Get Bounds of an object and its children
-    public static Bounds GetBounds(GameObject obj)
-    {
-        // Switch every collider to renderer for more accurate result
-        Bounds bounds = new Bounds();
-        Collider[] colliders = obj.GetComponentsInChildren<Collider>();
-
-        if (colliders.Length > 0)
+        foreach (Collider Close in CloseColliders)
         {
-            //Find first enabled renderer to start encapsulate from it
-            foreach (Collider collider in colliders)
+            //set a if here, to check if the target is a foe
+            float sqrDistance = (Close.transform.position - transform.position).sqrMagnitude;
+            if (sqrDistance < sqrMinDistance && isInFront(Close.transform, transform))
             {
-                if (collider.enabled) {
-                    bounds = collider.bounds;
-                    break;
-                }
-            }
-
-            //Encapsulate (grow bounds to include another) for all collider
-            foreach (Collider collider in colliders)
-            {
-                if (collider.enabled)
-                {
-                    bounds.Encapsulate(collider.bounds);
-                }
+                sqrMinDistance = sqrDistance;
+                ret = Close.transform;
             }
         }
-        return bounds;
+
+        if (ret != target) {
+            target = ret;
+            return true;
+        } 
+        
+        return false;
+    }
+
+    public bool SetTargetInFront()
+    {
+         RaycastHit targetAtFront;
+         int layerMask = 1 << enemiesLayerMask;
+         if (Physics.SphereCast(transform.parent.position, 10f, transform.parent.forward, out targetAtFront, 1000, layerMask))
+         {
+             target = targetAtFront.transform;
+             return true;
+         }
+         return false;
+    }
+
+    public bool isInFront(Transform target, Transform origin)
+    {
+        Vector3 heading = (target.position - origin.position).normalized;
+        return Vector3.Dot(heading, origin.forward) > 0;
     }
 }
