@@ -11,8 +11,18 @@ public class Car : MonoBehaviour
     public float brakeForce = 300f;
     public float engineBrakeForce = 100f;
 
-    public float Steer { get; set; }
-    public float Throttle { get; set; }
+    private float steer;
+    private float throttle;
+
+    public float Steer { 
+        get { return steer; }
+        set { steer = Mathf.Min(1, Mathf.Max(-1, value)); } 
+    }
+
+    public float Throttle { 
+        get { return throttle; }
+        set { throttle = Mathf.Min(1, Mathf.Max(-1, value)); } 
+    }
     public bool ShouldBrake { get; set; }
 
     protected float currentSpeed;

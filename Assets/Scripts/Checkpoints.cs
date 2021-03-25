@@ -13,5 +13,8 @@ public class Checkpoints : MonoBehaviour
     {
         Transforms = GetComponentsInChildren<Transform>();
         Transforms = Transforms.Skip(1).ToArray();
+        Debug.Log(Transforms[0].position);
+        Debug.Log(Transforms[1].position);
+        Debug.Log(Transforms[2].position);
     }
 }
