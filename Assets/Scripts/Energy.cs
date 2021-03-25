@@ -3,7 +3,6 @@
  
  public class Energy : MonoBehaviour {
     public static int curEnergy = 0;
-    public int TotalEnergy = curEnergy;
     public EnergyBar energyBar;
  
     void Start()
@@ -22,7 +21,6 @@
                 curEnergy = 100;
                 yield return null;
             }
-            TotalEnergy = curEnergy;
             energyBar.SetEnergy(curEnergy);
         }
     }
