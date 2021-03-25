@@ -4,7 +4,9 @@
  public class Laps : MonoBehaviour {
      
      // These Static Variables are accessed in "checkpoint" Script
-    public Transform[] checkPointArray;
+    public Checkpoints checkpoints;
+    
+    private Transform[] checkPointArray;
     public static Transform[] checkpointA;
     public static int currentCheckpoint = 0; 
     public static int currentLap = 0; 
@@ -14,6 +16,7 @@
      
     void  Start ()
     {
+        checkPointArray = checkpoints.Transforms;
         startPos = transform.position;
         currentCheckpoint = 0;
         currentLap = 0;

@@ -8,14 +8,15 @@ public class AICarController : CarController
     public float distanceThreshold = 7f;
     public float speedAfterCatchThreshold = 15f;
 
-    public Transform[] checkpointArray;
+    public Checkpoints checkpoints;
     private int currentCheckpoint;
+
     private Vector3 targetPosition;
     private Transform targetPositionTransform;
 
     public override void Update()
     {
-        SetTargetPosition(checkpointArray[currentCheckpoint]);
+        SetTargetPosition(checkpoints.Transforms[currentCheckpoint]);
 
         float forwardAmount = 0f;
         float turnAmount = 0f;
@@ -28,18 +29,23 @@ public class AICarController : CarController
         {
             Vector3 dirToMovePosition = (targetPosition - car.transform.position).normalized;
 
-            float dot = Vector3.Dot(targetPositionTransform.forward, dirToMovePosition);
+            float dot = Vector3.Dot(-targetPositionTransform.forward, dirToMovePosition);
             if (dot > 0)
             {
-                forwardAmount = 1f;
+                forwardAmount = 0.5f;
             }
             else
             {
-                forwardAmount = -1f;
+                forwardAmount = -0.5f;
             }
 
-            float angleToDir = Vector3.SignedAngle(car.transform.forward, dirToMovePosition, targetPosition.normalized);
+            float angleToDir = Vector3.SignedAngle(car.transform.forward, dirToMovePosition, Vector3.up);
 
+            Debug.Log("Posição do carro: ");
+            Debug.Log(car.transform.position);
+            Debug.Log("Posição do target: ");
+            Debug.Log(targetPosition);
+            Debug.Log("Angulo pro target: ");
             Debug.Log(angleToDir);
 
             if (Mathf.Abs(angleToDir) > steerThreshold)
@@ -59,7 +65,7 @@ public class AICarController : CarController
             // Already catched the target
             if (car.GetSpeed() > speedAfterCatchThreshold)
             {
-                forwardAmount = -1f;
+                forwardAmount = -0.5f;
             }
             else
             {
@@ -67,7 +73,7 @@ public class AICarController : CarController
             }
             turnAmount = 0f;
             shouldBreak = true;
-            currentCheckpoint = (currentCheckpoint + 1)%checkpointArray.Length;
+            currentCheckpoint = (currentCheckpoint + 1)%checkpoints.Transforms.Length;
         }
         
         car.Throttle = forwardAmount;
