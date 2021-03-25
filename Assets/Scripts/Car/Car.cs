@@ -13,10 +13,9 @@ public class Car : MonoBehaviour
 
     public float Steer { get; set; }
     public float Throttle { get; set; }
+    public bool ShouldBrake { get; set; }
 
     protected float currentSpeed;
-
-    private bool ShouldBrake { get; set; }
 
     private Rigidbody _rigidbody;
     private Wheel[] wheels;
@@ -30,36 +29,32 @@ public class Car : MonoBehaviour
 
     void Update()
     {
-        Steer = GameManager.Instance.InputController.SteerInput;
-        Throttle = GameManager.Instance.InputController.ThrottleInput;
-        ShouldBrake = GameManager.Instance.InputController.BrakeInput;
-
         currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
 
         foreach(var wheel in wheels)
         {
             if(ShouldBrake)
             {
-                Debug.Log("freia porra");
                 wheel.BrakeTorque = brakeForce;
             }
             else 
             {
                 if (Throttle == 0 && currentSpeed > minimumSpeed)
                 {
-                    Debug.Log("freia");
                     wheel.BrakeTorque = engineBrakeForce;
                 }
                 else
                 {
-                    Debug.Log("acelera");
                     wheel.Torque = Throttle * motorTorque;
                     wheel.BrakeTorque = 0;
                 }
             }
-
-            Debug.Log(currentSpeed);
             wheel.SteerAngle = Steer * maxSteer;
         }
+    }
+
+    public float GetSpeed()
+    {
+        return currentSpeed;
     }
 }
