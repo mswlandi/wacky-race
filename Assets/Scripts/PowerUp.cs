@@ -10,6 +10,7 @@ public class PowerUp : MonoBehaviour
 
     private Transform lightningTransform;
     private Vector3 initialPosition;
+    private int addUp = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -24,4 +25,12 @@ public class PowerUp : MonoBehaviour
         lightningTransform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
         lightningTransform.position = initialPosition + new Vector3(0, floatAmplitude * Mathf.Sin(floatSpeed * Time.time), 0);
     }
+
+    void  OnTriggerEnter ( Collider other  )
+     {
+         // Is it the Player who enters the collider?
+         if (!other.CompareTag("Player")) 
+            return; //If it's not the player dont continue 
+        Energy.curEnergy = Energy.curEnergy + addUp;
+     }
 }
