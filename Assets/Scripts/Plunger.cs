@@ -15,45 +15,59 @@ public class Plunger : MonoBehaviour
 
     public int enemiesLayerMask = 11;
 
+    public float plungerSpeed = 50F;
+
     private Transform target;
-    private Transform lookAtVector;
     private float yVelocity = 0.0F;
     private float xVelocity = 0.0F;
+
     private Transform rotatableBase;
     private Transform rotatableArm;
+    private Transform plunger;
     private Quaternion targetRotation;
 
-    private Bounds targetBounds;
+    private bool isAvailableToFire = true;
+    private bool isBeingLaunched = false;
+
+    private PlungerStick plungerStickCollisions;
+    private Rigidbody enemyRigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
+        rotatableBase = transform.GetChild(0);
+        rotatableArm = rotatableBase.GetChild(0);
+        plunger = rotatableArm.GetChild(0);
 
+        plungerStickCollisions = plunger.GetComponent<PlungerStick>();
     }
 
     // Update is called once per frame
     void Update()
     {
         #region Find Target
-        SetTargetCloserInFront();
+        if (isAvailableToFire)
+        {
+            SetTargetCloserInFront();
+        }
         #endregion
 
         #region Look-At Rotations
-        rotatableBase = transform.GetChild(0);
-        rotatableArm = rotatableBase.GetChild(0);
+        if (isAvailableToFire)
+        {
+            targetRotation = Quaternion.LookRotation(target.transform.position - rotatableBase.position);
+            rotatableBase.eulerAngles = new Vector3(0, Mathf.SmoothDampAngle(rotatableBase.eulerAngles.y, targetRotation.eulerAngles.y, ref yVelocity, rotationSnapTime), 0);
 
-        targetRotation = Quaternion.LookRotation(target.transform.position - rotatableBase.position);
-        rotatableBase.eulerAngles = new Vector3(0, Mathf.SmoothDampAngle(rotatableBase.eulerAngles.y, targetRotation.eulerAngles.y, ref yVelocity, rotationSnapTime), 0);
-
-        targetRotation = Quaternion.LookRotation(rotatableArm.position - target.transform.position);
-        rotatableArm.eulerAngles = new Vector3(Mathf.SmoothDampAngle(rotatableArm.eulerAngles.x, targetRotation.eulerAngles.x, ref xVelocity, rotationSnapTime), 180 + rotatableBase.eulerAngles.y, 0);
+            targetRotation = Quaternion.LookRotation(rotatableArm.position - target.transform.position);
+            rotatableArm.eulerAngles = new Vector3(Mathf.SmoothDampAngle(rotatableArm.eulerAngles.x, targetRotation.eulerAngles.x, ref xVelocity, rotationSnapTime), 180 + rotatableBase.eulerAngles.y, 0);
+        }
         #endregion
 
         #region Make Cross-Hair Follow target
-        crosshair.position = Camera.main.WorldToScreenPoint(target.position);
-        
-        if (Camera.main.WorldToScreenPoint(target.position).z > 0)
+        if (Camera.main.WorldToScreenPoint(target.position).z > 0 && isAvailableToFire)
         {
+            crosshair.position = Camera.main.WorldToScreenPoint(target.position);
+
             float distance = Vector3.Distance(Camera.main.transform.position, target.position);
             float distance_t = Mathf.InverseLerp(minScaleAtDistance, maxScaleAtDistance, distance);
             float scale = Mathf.Lerp(minScale, maxScale, distance_t);
@@ -63,6 +77,51 @@ public class Plunger : MonoBehaviour
         else
         {
             crosshair.localScale = new Vector3(0, 0, 0);
+        }
+        #endregion
+
+        #region Firing
+        if (Input.GetKeyDown (KeyCode.Space) && isAvailableToFire)
+        {
+            isAvailableToFire = false;
+            isBeingLaunched = true;
+            plunger.parent = null;
+        }
+        #endregion
+
+        // Reactivate Power-Up (CHANGE METHOD OF ACTIVATION)
+        if (Input.GetKeyDown (KeyCode.Tab))
+        {
+            isAvailableToFire = true;
+            isBeingLaunched = false;
+            plunger.parent = rotatableArm;
+
+            plungerStickCollisions.isAttached = false;
+            plungerStickCollisions.isAttachedToCar = false;
+
+            plunger.localPosition = new Vector3(0, 0.396291F, -1.7468F);
+            plunger.localEulerAngles = new Vector3(0, 0, 0);
+        }
+
+        #region Is Being Launched (it's airborne)
+        if (isBeingLaunched)
+        {
+            if (!plungerStickCollisions.isAttached)
+            {
+                plunger.position = Vector3.MoveTowards(plunger.position, target.position, plungerSpeed * Time.deltaTime);
+                plunger.rotation = Quaternion.LookRotation(plunger.position - target.transform.position);
+            }
+            else
+            {
+                plunger.parent = plungerStickCollisions.collidedObject.transform;
+
+                if (plungerStickCollisions.isAttachedToCar)
+                {
+                    float force = 500;
+                    enemyRigidBody = plungerStickCollisions.collidedObject.transform.parent.GetComponent<Rigidbody>();
+                    enemyRigidBody.AddForce((transform.position - plungerStickCollisions.collidedObject.transform.position).normalized * force, ForceMode.Impulse);
+                }
+            }
         }
         #endregion
     }
@@ -92,18 +151,6 @@ public class Plunger : MonoBehaviour
         } 
         
         return false;
-    }
-
-    public bool SetTargetInFront()
-    {
-         RaycastHit targetAtFront;
-         int layerMask = 1 << enemiesLayerMask;
-         if (Physics.SphereCast(transform.parent.position, 10f, transform.parent.forward, out targetAtFront, 1000, layerMask))
-         {
-             target = targetAtFront.transform;
-             return true;
-         }
-         return false;
     }
 
     public bool isInFront(Transform target, Transform origin)
