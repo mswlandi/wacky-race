@@ -13,13 +13,16 @@ public class PlungerStick : MonoBehaviour
     //Detect collisions between the GameObjects with Colliders attached
     private void OnTriggerEnter(Collider other)
     {
-        isAttached = true;
         collidedObject = other.gameObject;
 
-        //Check for a match with the specified name on any GameObject that collides with your GameObject
-        if (collidedObject.layer == botLayer)
+        if (collidedObject.tag == "SceneObject" || collidedObject.layer == botLayer)
         {
-            isAttachedToCar = true;
+            isAttached = true;
+            
+            if (collidedObject.layer == botLayer)
+            {
+                isAttachedToCar = true;
+            }
         }
     }
 }

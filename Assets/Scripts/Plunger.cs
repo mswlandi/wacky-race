@@ -16,6 +16,8 @@ public class Plunger : MonoBehaviour
     public int enemiesLayerMask = 11;
 
     public float plungerSpeed = 50F;
+    public float plungerForceTime = 5F;
+    public float plungerForce = 500F;
 
     private Transform target;
     private float yVelocity = 0.0F;
@@ -31,6 +33,8 @@ public class Plunger : MonoBehaviour
 
     private PlungerStick plungerStickCollisions;
     private Rigidbody enemyRigidBody;
+
+    private float currentPlungerTime = 0F;
 
     // Start is called before the first frame update
     void Start()
@@ -99,6 +103,8 @@ public class Plunger : MonoBehaviour
             plungerStickCollisions.isAttached = false;
             plungerStickCollisions.isAttachedToCar = false;
 
+            currentPlungerTime = 0F;
+
             plunger.localPosition = new Vector3(0, 0.396291F, -1.7468F);
             plunger.localEulerAngles = new Vector3(0, 0, 0);
         }
@@ -117,9 +123,13 @@ public class Plunger : MonoBehaviour
 
                 if (plungerStickCollisions.isAttachedToCar)
                 {
-                    float force = 500;
-                    enemyRigidBody = plungerStickCollisions.collidedObject.transform.parent.GetComponent<Rigidbody>();
-                    enemyRigidBody.AddForce((transform.position - plungerStickCollisions.collidedObject.transform.position).normalized * force, ForceMode.Impulse);
+                    if (currentPlungerTime < plungerForceTime)
+                    {
+                        enemyRigidBody = plungerStickCollisions.collidedObject.transform.parent.GetComponent<Rigidbody>();
+                        enemyRigidBody.AddForce((transform.position - plungerStickCollisions.collidedObject.transform.position).normalized * plungerForce, ForceMode.Impulse);
+                    }
+
+                    currentPlungerTime += Time.deltaTime;
                 }
             }
         }
