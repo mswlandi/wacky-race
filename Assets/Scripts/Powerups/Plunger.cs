@@ -16,7 +16,7 @@ public class Plunger : MonoBehaviour
     public int enemiesLayerMask = 11;
 
     public float plungerSpeed = 50F;
-    public float plungerForceTime = 5F;
+    public float plungerForceTime = 0.2F;
     public float plungerForce = 500F;
 
     private Transform target;
@@ -123,9 +123,9 @@ public class Plunger : MonoBehaviour
 
                 if (plungerStickCollisions.isAttachedToCar)
                 {
-                    if (currentPlungerTime < plungerForceTime)
+                    enemyRigidBody = plungerStickCollisions.collidedObject.transform.parent.GetComponent<Rigidbody>();
+                    if (enemyRigidBody != null && currentPlungerTime < plungerForceTime)
                     {
-                        enemyRigidBody = plungerStickCollisions.collidedObject.transform.parent.GetComponent<Rigidbody>();
                         enemyRigidBody.AddForce((transform.position - plungerStickCollisions.collidedObject.transform.position).normalized * plungerForce, ForceMode.Impulse);
                     }
 
