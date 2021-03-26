@@ -136,7 +136,6 @@ public class Plunger : MonoBehaviour
 
         foreach (Collider Close in CloseColliders)
         {
-            //set a if here, to check if the target is a foe
             float sqrDistance = (Close.transform.position - transform.position).sqrMagnitude;
             if (sqrDistance < sqrMinDistance && isInFront(Close.transform, transform))
             {
