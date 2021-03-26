@@ -19,6 +19,8 @@ public class Plunger : MonoBehaviour
     public float plungerForceTime = 0.2F;
     public float plungerForce = 500F;
 
+    public Material lineMaterial;
+
     private Transform target;
     private float yVelocity = 0.0F;
     private float xVelocity = 0.0F;
@@ -132,9 +134,31 @@ public class Plunger : MonoBehaviour
                     currentPlungerTime += Time.deltaTime;
                 }
             }
+
+            DrawLine(transform.position, plunger.position, Color.white);
         }
         #endregion
     }
+
+    void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.03f)
+    {
+        GameObject myLine = new GameObject();
+        myLine.transform.position = start;
+        myLine.AddComponent<LineRenderer>();
+        LineRenderer lr = myLine.GetComponent<LineRenderer>();
+        // lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
+        lr.material = lineMaterial;
+        lr.textureMode = LineTextureMode.Tile;
+        lr.startColor = color;
+        lr.endColor = color;
+        lr.startWidth = 0.2f;
+        lr.endWidth = 0.2f;
+        lr.SetPosition(0, start);
+        lr.SetPosition(1, end);
+        GameObject.Destroy(myLine, duration);
+    }
+
+
 
     public bool SetTargetCloserInFront()
     {
