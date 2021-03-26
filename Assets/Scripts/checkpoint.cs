@@ -1,44 +1,29 @@
  using UnityEngine;
  using System.Collections;
  
- public class checkpoint : MonoBehaviour {
-     
-     void  Start ()
-     {
-         
-     }
-     
-     void  OnTriggerEnter ( Collider other  )
-     {
-         // Is it the Player who enters the collider?
-         if (!other.CompareTag("Player")) 
+ public class Checkpoint : MonoBehaviour 
+ {
+    void OnTriggerEnter(Collider other)
+    {
+        Player player = other.GetComponentInParent<Player>();
+        if(player != null)
+        {
+            if(transform == player.Laps.CheckPointArray[player.Laps.CurrentCheckpoint].transform) 
             {
-                return; //If it's not the player dont continue
+                // Hide the last checkpoint for player and show the next one
+                if(player.CompareTag("Player"))
+                {
+                    Renderer currentRenderer = player.Laps.CheckPointArray[player.Laps.CurrentCheckpoint].parent.GetComponent<Renderer>();
+                    Renderer nextRenderer = player.Laps.CheckPointArray[player.Laps.NextCheckpoint].parent.GetComponent<Renderer>();
+                    if(currentRenderer != null && nextRenderer != null)
+                    {
+                        currentRenderer.enabled = false;
+                        nextRenderer.enabled = true;
+                    }
+                }
+                
+                player.Laps.IncrementCheckpoint();
             }
-         
- 
-         if (transform == Laps.checkpointA[Laps.currentCheckpoint].transform) 
-         {
-             // Hide the last checkpoint
-             Laps.checkpointA[Laps.currentCheckpoint].parent.GetComponent<Renderer>().enabled = false;
-             // Check so we dont exceed our checkpoint quantity
-             if (Laps.currentCheckpoint + 1 < Laps.checkpointA.Length) 
-             {
-                 // Add to currentLap if currentCheckpoint is 0
-                 if(Laps.currentCheckpoint == 0)
-                     Laps.currentLap++;
-                 Laps.currentCheckpoint++;
-             } 
-             else 
-             {
-                 // If we dont have any Checkpoints left, go back to 0
-                 Laps.currentCheckpoint = 0;
-             }
-             // Show the next checkpoint
-             Laps.checkpointA[Laps.currentCheckpoint].parent.GetComponent<Renderer>().enabled = true;
-         }
- 
- 
-     }
- 
- }
+        }
+    }
+}

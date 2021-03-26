@@ -1,32 +1,31 @@
  using UnityEngine;
  using System.Collections;
  
- public class Laps : MonoBehaviour {
-     
-     // These Static Variables are accessed in "checkpoint" Script
+ public class Laps : MonoBehaviour 
+ {
     public Checkpoints checkpoints;
     
-    private Transform[] checkPointArray;
-    public static Transform[] checkpointA;
-    public static int currentCheckpoint = 0; 
-    public static int currentLap = 0; 
-    public Vector3 startPos;
-    public int Lap;
-    public int NextCheckpoint;
+    private int currentCheckpoint;
+    public int CurrentCheckpoint { get { return currentCheckpoint; } private set { currentCheckpoint = value; } }
+    private int currentLap; 
+    public int CurrentLap { get { return currentLap; } private set { currentLap = value; } }
+
+    public int NextCheckpoint { get { return (currentCheckpoint + 1) % checkpoints.Size; } }
+
+    public Transform[] CheckPointArray { get { return checkpoints.Transforms; } }
      
-    void  Start ()
+    void Start()
     {
-        checkPointArray = checkpoints.Transforms;
-        startPos = transform.position;
-        currentCheckpoint = 0;
-        currentLap = 0;
+        CurrentCheckpoint = 0;
+        CurrentLap = 0;
     }
- 
-    void  Update ()
+
+    public void IncrementCheckpoint()
     {
-        Lap = currentLap;
-        checkpointA = checkPointArray;
-        NextCheckpoint = currentCheckpoint;
+        if(NextCheckpoint == 1)
+        {
+            CurrentLap++;
+        }
+        CurrentCheckpoint = NextCheckpoint;
     }
-     
 }

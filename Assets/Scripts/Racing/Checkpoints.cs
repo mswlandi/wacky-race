@@ -7,14 +7,12 @@ using UnityEngine;
 public class Checkpoints : MonoBehaviour
 {
     public Transform[] Transforms { get; private set; }
+    public int Size { get { return Transforms.Length; }}
     
     // Start is called before the first frame update
     void Start()
     {
         Transforms = GetComponentsInChildren<Transform>();
         Transforms = Transforms.Skip(1).ToArray();
-        Debug.Log(Transforms[0].position);
-        Debug.Log(Transforms[1].position);
-        Debug.Log(Transforms[2].position);
     }
 }

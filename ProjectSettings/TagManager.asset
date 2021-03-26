@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Checkpoint
   - Powerup
+  - Character
+  - Bot
   layers:
   - Default
   - TransparentFX

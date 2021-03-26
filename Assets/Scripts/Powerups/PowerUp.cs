@@ -26,11 +26,12 @@ public class PowerUp : MonoBehaviour
         lightningTransform.position = initialPosition + new Vector3(0, floatAmplitude * Mathf.Sin(floatSpeed * Time.time), 0);
     }
 
-    void  OnTriggerEnter ( Collider other  )
-     {
-         // Is it the Player who enters the collider?
-         if (!other.CompareTag("Player")) 
-            return; //If it's not the player dont continue 
-        Energy.curEnergy = Energy.curEnergy + addUp;
-     }
+    void OnTriggerEnter(Collider other)
+    {
+        Player player = other.GetComponentInParent<Player>();
+        if(player != null)
+        {
+            player.IncrementEnergy(addUp);
+        }
+    }
 }

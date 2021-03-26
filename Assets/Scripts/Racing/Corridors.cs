@@ -17,17 +17,17 @@ public class Corridors : MonoBehaviour
         firstPosition = GetComponent<Transform>().position;
         corridors = GetComponentsInChildren<Car>();
 
-        corridors[0].Position = firstPosition;
+        corridors[0].init(firstPosition);
 
         for (int i = 1; i < corridors.Length; i++)
         {
             if ((i % 2) == 1)
             {
-                corridors[i].Position = new Vector3(firstPosition.x + horizontalDistance, corridors[i-1].Position.y, corridors[i-1].Position.z - verticalDistance);
+                corridors[i].init(new Vector3(firstPosition.x + horizontalDistance, corridors[i-1].Position.y, corridors[i-1].Position.z - verticalDistance));
             }
             else
             {
-                corridors[i].Position = new Vector3(firstPosition.x, corridors[i-1].Position.y, corridors[i-1].Position.z - verticalDistance);
+                corridors[i].init(new Vector3(firstPosition.x, corridors[i-1].Position.y, corridors[i-1].Position.z - verticalDistance));
             }
         }
     }
