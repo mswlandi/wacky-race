@@ -21,4 +21,9 @@ public class Player : MonoBehaviour
     {
         this.Energy.value = this.Energy.value + increment;
     }
+
+    public void DecrementEnergy(int decrement)
+    {
+        this.Energy.value = this.Energy.value - decrement;
+    }
 }

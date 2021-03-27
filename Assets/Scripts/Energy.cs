@@ -13,7 +13,11 @@
     {
         while (true)
         { 
-            if (value < 100)
+            if (value < 0)
+            {
+                value = 0;
+            }
+            else if (value < 100)
             {
                 value += 1;
                 yield return new WaitForSeconds(1);
