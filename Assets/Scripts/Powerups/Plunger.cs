@@ -118,29 +118,27 @@ public class Plunger : MonoBehaviour
             {
                 plunger.parent = plungerStickCollisions.collidedObject.transform;
 
-                if (plungerStickCollisions.isAttachedToCar)
+                
+                enemyRigidBody = plungerStickCollisions.collidedObject.transform.parent.GetComponent<Rigidbody>();
+                if (currentPlungerTime < plungerForceTime)
                 {
-                    enemyRigidBody = plungerStickCollisions.collidedObject.transform.parent.GetComponent<Rigidbody>();
-                    if (currentPlungerTime < plungerForceTime)
+                    if (enemyRigidBody != null)
                     {
-                        if (enemyRigidBody != null)
-                        {
-                            enemyRigidBody.AddForce((transform.position - plungerStickCollisions.collidedObject.transform.position).normalized * plungerForce, ForceMode.Impulse);
-                        }
+                        enemyRigidBody.AddForce((transform.position - plungerStickCollisions.collidedObject.transform.position).normalized * plungerForce, ForceMode.Impulse);
                     }
-                    else
-                    {
-                        plunger.position = Vector3.MoveTowards(plunger.position, armTip, plungerSpeed * Time.deltaTime);
-                        plunger.rotation = Quaternion.LookRotation(target.transform.position - plunger.position);
-
-                        if (plungerStickCollisions.collidedWithPlungerArm)
-                        {
-                            ResetPlunger();
-                        }
-                    }
-
-                    currentPlungerTime += Time.deltaTime;
                 }
+                else
+                {
+                    plunger.position = Vector3.MoveTowards(plunger.position, armTip, plungerSpeed * Time.deltaTime);
+                    plunger.rotation = Quaternion.LookRotation(target.transform.position - plunger.position);
+
+                    if (plungerStickCollisions.collidedWithPlungerArm)
+                    {
+                        ResetPlunger();
+                    }
+                }
+
+                currentPlungerTime += Time.deltaTime;
             }
 
             DrawLine(armTip, plungerTip, Color.white);
