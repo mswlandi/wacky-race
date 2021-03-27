@@ -137,7 +137,7 @@ public class Plunger : MonoBehaviour
                 }
             }
 
-            DrawLine(transform.position, plunger.position, Color.white);
+            DrawLine(rotatableArm.position + 0.40F * rotatableArm.up - 0.6F * rotatableArm.forward, plunger.position + 1.8F * plunger.forward, Color.white);
         }
         #endregion
     }
@@ -148,7 +148,6 @@ public class Plunger : MonoBehaviour
         myLine.transform.position = start;
         myLine.AddComponent<LineRenderer>();
         LineRenderer lr = myLine.GetComponent<LineRenderer>();
-        // lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
         lr.material = lineMaterial;
         lr.textureMode = LineTextureMode.Tile;
         lr.startColor = color;
