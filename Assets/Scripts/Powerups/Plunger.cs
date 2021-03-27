@@ -213,7 +213,7 @@ public class Plunger : MonoBehaviour
     public bool isInFront(Transform target, Transform origin)
     {
         Vector3 heading = (target.position - origin.position).normalized;
-        return Vector3.Dot(heading, -origin.forward) > 0;
+        return Vector3.Dot(heading, origin.forward) > 0;
     }
 
     public bool isAvailableToFire(Player player)
