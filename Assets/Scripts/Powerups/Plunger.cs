@@ -21,6 +21,8 @@ public class Plunger : MonoBehaviour
 
     public Material lineMaterial;
 
+    public Transform initialTarget;
+
     private Transform target;
     private float yVelocity = 0.0F;
     private float xVelocity = 0.0F;
@@ -48,6 +50,8 @@ public class Plunger : MonoBehaviour
 
         plungerStickCollisions = plunger.GetComponent<PlungerStick>();
         player = plunger.GetComponentInParent<Player>();
+
+        target = initialTarget;
     }
 
     // Update is called once per frame
@@ -130,7 +134,7 @@ public class Plunger : MonoBehaviour
                 else
                 {
                     plunger.position = Vector3.MoveTowards(plunger.position, armTip, plungerSpeed * Time.deltaTime);
-                    plunger.rotation = Quaternion.LookRotation(target.transform.position - plunger.position);
+                    plunger.rotation = Quaternion.LookRotation(plunger.position - target.transform.position);
 
                     if (plungerStickCollisions.collidedWithPlungerArm)
                     {
@@ -209,7 +213,7 @@ public class Plunger : MonoBehaviour
     public bool isInFront(Transform target, Transform origin)
     {
         Vector3 heading = (target.position - origin.position).normalized;
-        return Vector3.Dot(heading, origin.forward) > 0;
+        return Vector3.Dot(heading, -origin.forward) > 0;
     }
 
     public bool isAvailableToFire(Player player)
