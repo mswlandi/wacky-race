@@ -103,6 +103,7 @@ public class Plunger : MonoBehaviour
         if (Input.GetKeyDown (KeyCode.Tab))
         {
             ResetPlunger();
+            player.IncrementEnergy(100); // Temporary for testing purposes, it should stay at zero
         }
 
         #region Is Being Launched (it's airborne)
@@ -149,8 +150,6 @@ public class Plunger : MonoBehaviour
     
     void ResetPlunger()
     {
-        //isAvailableToFire = true;
-        player.IncrementEnergy(100); // Temporary for testing purposes, it should stay at zero
         isBeingLaunched = false;
         plunger.parent = rotatableArm;
 
