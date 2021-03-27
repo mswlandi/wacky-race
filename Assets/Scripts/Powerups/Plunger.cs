@@ -30,11 +30,12 @@ public class Plunger : MonoBehaviour
     private Transform plunger;
     private Quaternion targetRotation;
 
-    private bool isAvailableToFire = true;
     private bool isBeingLaunched = false;
 
     private PlungerStick plungerStickCollisions;
     private Rigidbody enemyRigidBody;
+
+    Player player;
 
     private float currentPlungerTime = 0F;
 
@@ -46,20 +47,20 @@ public class Plunger : MonoBehaviour
         plunger = rotatableArm.GetChild(0);
 
         plungerStickCollisions = plunger.GetComponent<PlungerStick>();
+        player = plunger.GetComponentInParent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
         #region Find Target
-        if (isAvailableToFire)
-        {
-            SetTargetCloserInFront();
-        }
+   
+        SetTargetCloserInFront();
+        
         #endregion
 
         #region Look-At Rotations
-        if (isAvailableToFire)
+        if (isAvailableToFire(player))
         {
             targetRotation = Quaternion.LookRotation(target.transform.position - rotatableBase.position);
             rotatableBase.eulerAngles = new Vector3(0, Mathf.SmoothDampAngle(rotatableBase.eulerAngles.y, targetRotation.eulerAngles.y, ref yVelocity, rotationSnapTime), 0);
@@ -70,7 +71,7 @@ public class Plunger : MonoBehaviour
         #endregion
 
         #region Make Cross-Hair Follow target
-        if (Camera.main.WorldToScreenPoint(target.position).z > 0 && isAvailableToFire)
+        if (Camera.main.WorldToScreenPoint(target.position).z > 0 && isAvailableToFire(player))
         {
             crosshair.position = Camera.main.WorldToScreenPoint(target.position);
 
@@ -87,9 +88,9 @@ public class Plunger : MonoBehaviour
         #endregion
 
         #region Firing
-        if (Input.GetKeyDown (KeyCode.Space) && isAvailableToFire)
+        if (Input.GetKeyDown (KeyCode.Space) && isAvailableToFire(player))
         {
-            isAvailableToFire = false;
+            player.DecrementEnergy(100);
             isBeingLaunched = true;
             plunger.parent = null;
         }
@@ -98,7 +99,8 @@ public class Plunger : MonoBehaviour
         // Reactivate Power-Up (CHANGE METHOD OF ACTIVATION)
         if (Input.GetKeyDown (KeyCode.Tab))
         {
-            isAvailableToFire = true;
+            //isAvailableToFire = true;
+            player.IncrementEnergy(100); // Temporary for testing purposes, it should stay at zero
             isBeingLaunched = false;
             plunger.parent = rotatableArm;
 
@@ -190,5 +192,15 @@ public class Plunger : MonoBehaviour
     {
         Vector3 heading = (target.position - origin.position).normalized;
         return Vector3.Dot(heading, origin.forward) > 0;
+    }
+
+    public bool isAvailableToFire(Player player)
+    {
+        if (player.Energy.value == 100)
+        {
+            return true;
+        }
+        
+        return false;
     }
 }
