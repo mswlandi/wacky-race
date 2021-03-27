@@ -13,8 +13,8 @@
                 // Hide the last checkpoint for player and show the next one
                 if(player.CompareTag("Player"))
                 {
-                    Renderer currentRenderer = player.Laps.CheckPointArray[player.Laps.CurrentCheckpoint].parent.GetComponent<Renderer>();
-                    Renderer nextRenderer = player.Laps.CheckPointArray[player.Laps.NextCheckpoint].parent.GetComponent<Renderer>();
+                    Renderer currentRenderer = player.Laps.CheckPointArray[player.Laps.CurrentCheckpoint].GetComponentInChildren<Renderer>();
+                    Renderer nextRenderer = player.Laps.CheckPointArray[player.Laps.NextCheckpoint].parent.GetComponentInChildren<Renderer>();
                     if(currentRenderer != null && nextRenderer != null)
                     {
                         currentRenderer.enabled = false;
