@@ -28,4 +28,14 @@
         }
         CurrentCheckpoint = NextCheckpoint;
     }
+
+    public Transform CurrentCheckpointTransform()
+    {
+        return CheckPointArray[CurrentCheckpoint];
+    }
+
+    public Transform NextCheckpointTransform()
+    {
+        return CheckPointArray[NextCheckpoint];
+    }
 }
