@@ -53,10 +53,13 @@ public class Plunger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #region Calculate a couple positions
+        Vector3 armTip = rotatableArm.position + 0.40F * rotatableArm.up - 0.6F * rotatableArm.forward;
+        Vector3 plungerTip = plunger.position + 1.8F * plunger.forward;
+        #endregion
+
         #region Find Target
-   
         SetTargetCloserInFront();
-        
         #endregion
 
         #region Look-At Rotations
@@ -99,18 +102,7 @@ public class Plunger : MonoBehaviour
         // Reactivate Power-Up (CHANGE METHOD OF ACTIVATION)
         if (Input.GetKeyDown (KeyCode.Tab))
         {
-            //isAvailableToFire = true;
-            player.IncrementEnergy(100); // Temporary for testing purposes, it should stay at zero
-            isBeingLaunched = false;
-            plunger.parent = rotatableArm;
-
-            plungerStickCollisions.isAttached = false;
-            plungerStickCollisions.isAttachedToCar = false;
-
-            currentPlungerTime = 0F;
-
-            plunger.localPosition = new Vector3(0, 0.396291F, -1.7468F);
-            plunger.localEulerAngles = new Vector3(0, 0, 0);
+            ResetPlunger();
         }
 
         #region Is Being Launched (it's airborne)
@@ -128,18 +120,48 @@ public class Plunger : MonoBehaviour
                 if (plungerStickCollisions.isAttachedToCar)
                 {
                     enemyRigidBody = plungerStickCollisions.collidedObject.transform.parent.GetComponent<Rigidbody>();
-                    if (enemyRigidBody != null && currentPlungerTime < plungerForceTime)
+                    if (currentPlungerTime < plungerForceTime)
                     {
-                        enemyRigidBody.AddForce((transform.position - plungerStickCollisions.collidedObject.transform.position).normalized * plungerForce, ForceMode.Impulse);
+                        if (enemyRigidBody != null)
+                        {
+                            enemyRigidBody.AddForce((transform.position - plungerStickCollisions.collidedObject.transform.position).normalized * plungerForce, ForceMode.Impulse);
+                        }
+                    }
+                    else
+                    {
+                        plunger.position = Vector3.MoveTowards(plunger.position, armTip, plungerSpeed * Time.deltaTime);
+                        plunger.rotation = Quaternion.LookRotation(target.transform.position - plunger.position);
+
+                        if (plungerStickCollisions.collidedWithPlungerArm)
+                        {
+                            ResetPlunger();
+                        }
                     }
 
                     currentPlungerTime += Time.deltaTime;
                 }
             }
 
-            DrawLine(rotatableArm.position + 0.40F * rotatableArm.up - 0.6F * rotatableArm.forward, plunger.position + 1.8F * plunger.forward, Color.white);
+            DrawLine(armTip, plungerTip, Color.white);
         }
         #endregion
+    }
+    
+    void ResetPlunger()
+    {
+        //isAvailableToFire = true;
+        player.IncrementEnergy(100); // Temporary for testing purposes, it should stay at zero
+        isBeingLaunched = false;
+        plunger.parent = rotatableArm;
+
+        plungerStickCollisions.isAttached = false;
+        plungerStickCollisions.isAttachedToCar = false;
+        plungerStickCollisions.collidedWithPlungerArm = false;
+
+        currentPlungerTime = 0F;
+
+        plunger.localPosition = new Vector3(0, 0.396291F, -1.7468F);
+        plunger.localEulerAngles = new Vector3(0, 0, 0);
     }
 
     void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.03f)

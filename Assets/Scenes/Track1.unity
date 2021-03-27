@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10017,6 +10017,7 @@ MonoBehaviour:
   isAttachedToCar: 0
   botLayer: 11
   collidedObject: {fileID: 0}
+  collidedWithPlungerArm: 0
 --- !u!54 &273774613
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -79711,6 +79712,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d90c767fce3397f4087f250051d268c0, type: 3}
+--- !u!1 &2096099804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9050076449605188674, guid: d5d1917a92d0a3c448c1b26ce7b85a01,
+    type: 3}
+  m_PrefabInstance: {fileID: 3177727547600171078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &2096099805
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096099804}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1487444250322024723, guid: 2d65e06a7b17943448e55f379c2e54bc, type: 3}
 --- !u!1001 &2097039931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86402,6 +86423,11 @@ PrefabInstance:
         type: 3}
       propertyPath: plungerForceTime
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050076449605188674, guid: d5d1917a92d0a3c448c1b26ce7b85a01,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlungerRotatableArm
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d1917a92d0a3c448c1b26ce7b85a01, type: 3}

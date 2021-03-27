@@ -9,6 +9,7 @@ TagManager:
   - SceneObject
   - Character
   - Bot
+  - PlungerRotatableArm
   layers:
   - Default
   - TransparentFX
