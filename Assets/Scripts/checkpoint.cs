@@ -14,7 +14,7 @@
                 if(player.CompareTag("Player"))
                 {
                     Renderer currentRenderer = player.Laps.CheckPointArray[player.Laps.CurrentCheckpoint].GetComponentInChildren<Renderer>();
-                    Renderer nextRenderer = player.Laps.CheckPointArray[player.Laps.NextCheckpoint].parent.GetComponentInChildren<Renderer>();
+                    Renderer nextRenderer = player.Laps.CheckPointArray[player.Laps.NextCheckpoint].GetComponentInChildren<Renderer>();
                     if(currentRenderer != null && nextRenderer != null)
                     {
                         currentRenderer.enabled = false;
