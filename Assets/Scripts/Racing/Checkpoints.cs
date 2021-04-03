@@ -12,7 +12,7 @@ public class Checkpoints : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Transforms = GetComponentsInChildren<Transform>();
-        Transforms = Transforms.Skip(1).ToArray();
+        Checkpoint[] checkpoints = GetComponentsInChildren<Checkpoint>();
+        Transforms = checkpoints.Select(checkpoint => checkpoint.GetComponent<Transform>()).ToArray();
     }
 }
