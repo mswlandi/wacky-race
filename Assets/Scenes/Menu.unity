@@ -91582,6 +91582,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 534480690}
     m_Modifications:
+    - target: {fileID: 2651453011276469722, guid: 3b71b5a55e004e040889a40e69d60693,
+        type: 3}
+      propertyPath: m_Text
+      value: Options
+      objectReference: {fileID: 0}
     - target: {fileID: 2651453011825472788, guid: 3b71b5a55e004e040889a40e69d60693,
         type: 3}
       propertyPath: m_Name
@@ -91730,6 +91735,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551105123420812212, guid: e4bda2341c43af440996c13341d6e47d,
+        type: 3}
+      propertyPath: m_Text
+      value: Start Game
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4bda2341c43af440996c13341d6e47d, type: 3}
