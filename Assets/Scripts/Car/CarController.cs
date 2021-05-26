@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class CarController : MonoBehaviour
 {
     public float TimeStillNeededToReset = 3.0f;
+    public float PositionChangeToResetThreshold = 0.01F;
 
     protected Car car;
 
@@ -24,7 +25,7 @@ public abstract class CarController : MonoBehaviour
             ResetCar();
         }
 
-        if (lastPosition == car.transform.position)
+        if ((lastPosition - car.transform.position).magnitude < PositionChangeToResetThreshold)
         {
             timeSinceTransformChange += Time.deltaTime;
         }
