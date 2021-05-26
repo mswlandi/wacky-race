@@ -10,6 +10,8 @@ TagManager:
   - Character
   - Bot
   - PlungerRotatableArm
+  - CheckpointsAI
+  - Corridors
   layers:
   - Default
   - TransparentFX

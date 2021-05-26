@@ -6,9 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 8fc9f621daf859e4d89bbedc0cb6c183
+    path: Assets/Scenes/Menu.unity
+    guid: 7949798173bd3a84392b77793aeab366
   - enabled: 1
     path: Assets/Scenes/Track1.unity
     guid: e5abc91c3c3ba2148bc5dfce42f72f05
+  - enabled: 1
+    path: Assets/Scenes/Track1Booster.unity
+    guid: c11f63d88bbbe2f40877ce85fe453ff2
+  - enabled: 1
+    path: Assets/Scenes/Track1Discombobulate.unity
+    guid: f771017a587fa424c8d02e0cf7562b07
+  - enabled: 1
+    path: Assets/Scenes/Track1Riddikulus.unity
+    guid: c4a11049c8ee7a3489b06d7a53b02609
+  - enabled: 1
+    path: Assets/Scenes/Track2Booster.unity
+    guid: f074a0be01aa3e845bf472d979e222cd
+  - enabled: 1
+    path: Assets/Scenes/Track2Discombobulate.unity
+    guid: be26bf3c155caa046b4de0205e8d96ac
+  - enabled: 1
+    path: Assets/Scenes/Track2Riddikulus.unity
+    guid: 72d1cb12588361b4d98e63e5664479d1
   m_configObjects: {}

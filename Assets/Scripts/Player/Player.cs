@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Character character;
+    public Character character;
     public Laps Laps { get; private set; }
     public Energy Energy { get; private set; }
     public Vector3 Position { get { return character.Position; } }
