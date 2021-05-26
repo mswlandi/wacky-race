@@ -10,6 +10,8 @@ public class Car : Character
     public float brakeForce = 300f;
     public float engineBrakeForce = 100f;
 
+    public AudioSource source;
+
     private float steer;
     public float Steer 
     { 
@@ -31,11 +33,13 @@ public class Car : Character
     void Start()
     {
         wheels = GetComponentsInChildren<Wheel>();
+        source = GetComponent<AudioSource>();
     }
 
     protected override void Run()
     {
         Speed = rigidbody.velocity.magnitude;
+        UpdatePitch("CarEngine", Speed);
 
         foreach(var wheel in wheels)
         {
@@ -57,5 +61,11 @@ public class Car : Character
             }
             wheel.SteerAngle = Steer * maxSteer;
         }
+    }
+
+    public void UpdatePitch (string name, float speed)
+    {
+        if (source == null) return;
+        source.pitch =  Mathf.InverseLerp(0f, 30f, speed) + 1.3f;
     }
 }
