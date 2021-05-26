@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +7,19 @@ public class MenuButtonController : MonoBehaviour {
 
 	// Use this for initialization
 	public int index;
-	[SerializeField] bool keyDown;
-	[SerializeField] int maxIndex;
+	[SerializeField] public bool keyDown;
+	[SerializeField] public int maxIndex;
 	public AudioSource audioSource;
 
 	void Start () {
 		audioSource = GetComponent<AudioSource>();
+
+		MenuButton[] buttons = GetComponentsInChildren<MenuButton>();
+
+		foreach (MenuButton button in buttons)
+		{
+			button.Activated = button.Activated;
+		}
 	}
 	
 	// Update is called once per frame
