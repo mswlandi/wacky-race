@@ -10,5 +10,22 @@ public abstract class CarController : MonoBehaviour
     {
         car = GetComponent<Car>();
     }
-    public abstract void Update();
+
+    public virtual void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetCar();
+        }
+    }
+
+    public void ResetCar()
+    {
+        Transform checkpointTransform = car.GetComponent<Laps>().LastCheckpointTransform();
+        car.transform.position = checkpointTransform.position + new Vector3(0,-1.1F,0);
+        car.transform.eulerAngles = checkpointTransform.eulerAngles;
+
+        Rigidbody carRigidbody = car.GetComponent<Rigidbody>();
+        carRigidbody.velocity = new Vector3(0,0,0);
+    }
 }
