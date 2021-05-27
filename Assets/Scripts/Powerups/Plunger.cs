@@ -41,7 +41,7 @@ public class Plunger : MonoBehaviour
 
     private float currentPlungerTime = 0F;
 
-    private bool enableCrosshair = false;
+    private bool enableCrosshair = true;
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +84,7 @@ public class Plunger : MonoBehaviour
             #region Make Cross-Hair Follow target
             if (Camera.main.WorldToScreenPoint(target.position).z > 0 && isAvailableToFire(player))
             {
+                crosshair.gameObject.SetActive(true);
                 crosshair.position = Camera.main.WorldToScreenPoint(target.position);
 
                 float distance = Vector3.Distance(Camera.main.transform.position, target.position);
@@ -94,7 +95,7 @@ public class Plunger : MonoBehaviour
             }
             else
             {
-                crosshair.localScale = new Vector3(0, 0, 0);
+                crosshair.gameObject.SetActive(false);
             }
             #endregion
         }

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerController : CarController
 {
-    public override void Update()
+    public virtual void Update()
     {
+        base.Update();
         car.Steer = GameManager.Instance.InputController.SteerInput;
         car.Throttle = GameManager.Instance.InputController.ThrottleInput;
         car.ShouldBrake = GameManager.Instance.InputController.BrakeInput;
