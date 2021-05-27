@@ -6,12 +6,13 @@ public class SpiderAttack : MonoBehaviour
 {
     public float radius;
     public float force;
+    public float duration = 4;
 
     private Rigidbody rigidbody;
     private Player player;
     private SphereCollider collider;
 
-    private bool exploding = true;
+    private bool exploding = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class SpiderAttack : MonoBehaviour
     {
         if (Input.GetKeyDown (KeyCode.Space) && isAvailableToAttack(player))
         {
-            exploding = !exploding;
+            StartCoroutine(Attack());
         }
     }
 
@@ -38,12 +39,26 @@ public class SpiderAttack : MonoBehaviour
         if(otherRigidBody != null && exploding)
         {
             otherRigidBody.AddExplosionForce(force, player.Position, radius);
-            Debug.Log("explodi");
         }
     }
 
     bool isAvailableToAttack(Player player)
     {
         return player.Energy.value == 100;
+    }
+
+    void DeactivateAttack()
+    {
+        player.DecrementEnergy(player.Energy.value);
+        exploding = false;
+    }
+
+    IEnumerator Attack()
+    {
+        exploding = true;
+
+        yield return new WaitForSeconds(duration);
+
+        DeactivateAttack();
     }
 }
