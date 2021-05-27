@@ -12,21 +12,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Track1.unity
     guid: e5abc91c3c3ba2148bc5dfce42f72f05
   - enabled: 1
-    path: Assets/Scenes/Track1Booster.unity
+    path: Assets/Scenes/NatureBooster.unity
     guid: c11f63d88bbbe2f40877ce85fe453ff2
   - enabled: 1
-    path: Assets/Scenes/Track1Discombobulate.unity
+    path: Assets/Scenes/NatureDiscombobulate.unity
     guid: f771017a587fa424c8d02e0cf7562b07
   - enabled: 1
-    path: Assets/Scenes/Track1Riddikulus.unity
+    path: Assets/Scenes/NatureRiddikulus.unity
     guid: c4a11049c8ee7a3489b06d7a53b02609
   - enabled: 1
-    path: Assets/Scenes/Track2Booster.unity
+    path: Assets/Scenes/NascarBooster.unity
     guid: f074a0be01aa3e845bf472d979e222cd
   - enabled: 1
-    path: Assets/Scenes/Track2Discombobulate.unity
+    path: Assets/Scenes/NascarDiscombobulate.unity
     guid: be26bf3c155caa046b4de0205e8d96ac
   - enabled: 1
-    path: Assets/Scenes/Track2Riddikulus.unity
+    path: Assets/Scenes/NascarRiddikulus.unity
     guid: 72d1cb12588361b4d98e63e5664479d1
   m_configObjects: {}

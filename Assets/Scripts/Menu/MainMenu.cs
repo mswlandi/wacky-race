@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : Menu
 {
-    public void PlayGame ()
+    public void Quit ()
     {
-        SceneManager.LoadScene("Track1");
+        Application.Quit();
     }
 }
