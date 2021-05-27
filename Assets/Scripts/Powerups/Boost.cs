@@ -18,10 +18,12 @@ public class Boost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown (KeyCode.V) && isAvailableToFire(player))
+        if (Input.GetKeyDown (KeyCode.Space) && isAvailableToFire(player))
         {
             rb.AddRelativeForce(Vector3.forward * thrust);
-            player.DecrementEnergy(50);
+            player.DecrementEnergy(0);
+            
+            if (player.CompareTag("Player")) FindObjectOfType<AudioManager>().Play("Power");
         }
     }
 

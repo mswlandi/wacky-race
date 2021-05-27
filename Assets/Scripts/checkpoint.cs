@@ -23,6 +23,8 @@
                 }
                 
                 player.Laps.IncrementCheckpoint();
+
+                if(player.Laps.CurrentLap == 4 && player.CompareTag("Player")) player.EndGame();
             }
         }
     }
