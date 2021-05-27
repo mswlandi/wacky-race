@@ -21,7 +21,7 @@ public class Boost : MonoBehaviour
         if (Input.GetKeyDown (KeyCode.Space) && isAvailableToFire(player))
         {
             rb.AddRelativeForce(Vector3.forward * thrust);
-            player.DecrementEnergy(0);
+            player.DecrementEnergy(50);
             
             if (player.CompareTag("Player")) FindObjectOfType<AudioManager>().Play("Power");
         }
