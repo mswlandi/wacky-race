@@ -39123,6 +39123,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 261426988}
     m_Modifications:
+    - target: {fileID: 3677514208052102012, guid: 31ed250c500ecca4c9e282faecf66259,
+        type: 3}
+      propertyPath: enableCrosshair
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3677514209674199784, guid: 31ed250c500ecca4c9e282faecf66259,
         type: 3}
       propertyPath: checkpoints

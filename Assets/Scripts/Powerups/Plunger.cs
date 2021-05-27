@@ -41,7 +41,7 @@ public class Plunger : MonoBehaviour
 
     private float currentPlungerTime = 0F;
 
-    private bool enableCrosshair = true;
+    public bool enableCrosshair = true;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +52,9 @@ public class Plunger : MonoBehaviour
 
         plungerStickCollisions = plunger.GetComponent<PlungerStick>();
         player = plunger.GetComponentInParent<Player>();
+
+        if (crosshair == null)
+            enableCrosshair = false;
 
         target = initialTarget;
     }
