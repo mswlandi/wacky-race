@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 1512508917445985295}
   - component: {fileID: 1512508917445985294}
   m_Layer: 0
-  m_Name: PlayerSpider 1
+  m_Name: PlayerSpiderWithAttack
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f4d688bbaeadd4f80d7bc4f582c1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
 --- !u!1 &1543392749739604384
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,6 +738,7 @@ MonoBehaviour:
   maxSteer: 50
   brakeForce: 100
   engineBrakeForce: 10
+  source: {fileID: 0}
 --- !u!114 &5006973721619286449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,6 +764,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db09f1f64ca5bdd468d497b7f6e6e6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeStillNeededToReset: 3
+  PositionChangeToResetThreshold: 0.01
 --- !u!114 &1512508917955405923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1301,8 +1305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed956ec4eeaa094ebc68f4e63bcd475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
-  force: 1e+9
+  radius: 4
+  force: 1000000
 --- !u!135 &5749293009190891064
 SphereCollider:
   m_ObjectHideFlags: 0

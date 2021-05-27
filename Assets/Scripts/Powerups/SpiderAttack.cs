@@ -6,11 +6,11 @@ public class SpiderAttack : MonoBehaviour
 {
     public float radius;
     public float force;
-    public float duration = 4;
 
     private Rigidbody rigidbody;
     private Player player;
     private SphereCollider collider;
+    List <Rigidbody> currentRigidBodyColliding = new List <Rigidbody>();
 
     private bool exploding = false;
 
@@ -29,16 +29,25 @@ public class SpiderAttack : MonoBehaviour
     {
         if (Input.GetKeyDown (KeyCode.Space) && isAvailableToAttack(player))
         {
-            StartCoroutine(Attack());
+            Attack();
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
         Rigidbody otherRigidBody = other.GetComponentInParent<Rigidbody>();
-        if(otherRigidBody != null && exploding)
+        if(otherRigidBody != null)
         {
-            otherRigidBody.AddExplosionForce(force, player.Position, radius);
+            currentRigidBodyColliding.Add(otherRigidBody);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        Rigidbody otherRigidBody = other.GetComponentInParent<Rigidbody>();
+        if(otherRigidBody != null)
+        {
+            currentRigidBodyColliding.Remove(otherRigidBody);
         }
     }
 
@@ -50,14 +59,14 @@ public class SpiderAttack : MonoBehaviour
     void DeactivateAttack()
     {
         player.DecrementEnergy(player.Energy.value);
-        exploding = false;
     }
 
-    IEnumerator Attack()
+    void Attack()
     {
-        exploding = true;
-
-        yield return new WaitForSeconds(duration);
+        foreach (Rigidbody rigidbody in currentRigidBodyColliding)
+        {
+            rigidbody.AddExplosionForce(force, player.Position, radius);
+        }
 
         DeactivateAttack();
     }
