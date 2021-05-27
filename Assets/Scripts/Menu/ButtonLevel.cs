@@ -32,6 +32,7 @@ public class ButtonLevel : MonoBehaviour
                 break;
         }
 
-        cameraController.CurrentCamera = camera;
+        if (camera != null)
+            cameraController.CurrentCamera = camera;
     }
 }
