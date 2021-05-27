@@ -106,6 +106,7 @@ public class Plunger : MonoBehaviour
         #region Firing
         if (Input.GetKeyDown (KeyCode.Space) && isAvailableToFire(player))
         {
+            if (player.CompareTag("Player")) FindObjectOfType<AudioManager>().Play("Power");
             player.DecrementEnergy(100);
             isBeingLaunched = true;
             plunger.parent = null;

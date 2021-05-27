@@ -30,6 +30,7 @@ public class SpiderAttack : MonoBehaviour
         if (Input.GetKeyDown (KeyCode.Space) && isAvailableToAttack(player))
         {
             Attack();
+            if (player.CompareTag("Player")) FindObjectOfType<AudioManager>().Play("Power");
         }
     }
 
