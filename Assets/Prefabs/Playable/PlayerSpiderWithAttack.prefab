@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489ff33afe1788f4280221f2877cc971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steer: 1
+  steer: 0
   invertSteer: 0
   power: 1
 --- !u!1 &3940041865798995279
@@ -435,7 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489ff33afe1788f4280221f2877cc971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steer: 1
+  steer: 0
   invertSteer: 0
   power: 1
 --- !u!1 &4555046569669753600
@@ -867,7 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489ff33afe1788f4280221f2877cc971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steer: 1
+  steer: 0
   invertSteer: 0
   power: 1
 --- !u!1 &5191075337035078820
@@ -1647,6 +1647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489ff33afe1788f4280221f2877cc971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steer: 1
+  steer: 0
   invertSteer: 0
   power: 1

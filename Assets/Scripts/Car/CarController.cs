@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public abstract class CarController : MonoBehaviour
@@ -42,6 +43,7 @@ public abstract class CarController : MonoBehaviour
         Transform checkpointTransform = car.GetComponent<Laps>().LastCheckpointTransform();
         car.transform.position = checkpointTransform.position + new Vector3(0,-1.1F,0);
         car.transform.eulerAngles = checkpointTransform.eulerAngles;
+        car.transform.Rotate(0, 180, 0); 
 
         Rigidbody carRigidbody = car.GetComponent<Rigidbody>();
         carRigidbody.velocity = new Vector3(0,0,0);
