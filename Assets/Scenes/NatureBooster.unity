@@ -3565,7 +3565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400e07eb3f56136408f7d745ed32bab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 3177727547792874421}
 --- !u!114 &86730170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17064,9 +17064,9 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Power
     clip: {fileID: 8300000, guid: f60208dd396113741924de2d6ccd5f61, type: 3}
-    volume: 0.05
+    volume: 0.35
     pitch: 1
-    loop: 1
+    loop: 0
     source: {fileID: 0}
 --- !u!4 &428679479
 Transform:
@@ -51815,8 +51815,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 815, y: 385}
-  m_SizeDelta: {x: 100, y: 150}
+  m_AnchoredPosition: {x: 781.2, y: 385.5}
+  m_SizeDelta: {x: 167.65097, y: 148.91266}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1275884702
 MonoBehaviour:
