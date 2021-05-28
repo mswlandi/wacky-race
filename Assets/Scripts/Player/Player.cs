@@ -63,14 +63,25 @@ public class Player : MonoBehaviour
     public void EndGame()
     {
         this.Laps.CurrentLap = 0;
+        
+        Color transp = new Color(0f, 0f, 0f, 0f);
+        Color white = new Color(1f, 1f, 1f, 1f);
         FindObjectOfType<AudioManager>().Stop("Theme");
         FindObjectOfType<AudioManager>().Play("Win");
+        foreach(Transform ps in FindObjectOfType<Canvas>().GetComponentsInChildren<Transform>()) {
+            if (ps.gameObject.name == "Position") ps.GetComponent<UnityEngine.UI.Text>().color = transp;
+            if (ps.gameObject.name == "PositionFinal")  
+            {
+                ps.GetComponent<UnityEngine.UI.Text>().color = white;
+                ps.GetComponent<UIPosition>().enabled = false;
+            }
+        }
         StartCoroutine(waiter());
     }
 
     IEnumerator waiter()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(7);
         SceneManager.LoadScene("Menu");
     }
 }
