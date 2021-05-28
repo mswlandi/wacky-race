@@ -44,7 +44,22 @@ public class Player : MonoBehaviour
     public static int CompareTo(Player player, Player other)
     {
         int response;
-        if (player.Laps.CurrentLap != other.Laps.CurrentLap)
+
+        int playerCurrentLap = player.Laps.CurrentLap;
+        int otherCurrentLap = other.Laps.CurrentLap;
+
+        if (player.Laps.NextLap)
+        {
+            playerCurrentLap++;
+        }
+
+        if (other.Laps.NextLap)
+        {
+            otherCurrentLap++;
+        }
+
+
+        if (playerCurrentLap != otherCurrentLap)
         {
             response = other.Laps.CurrentLap - player.Laps.CurrentLap;
         }
