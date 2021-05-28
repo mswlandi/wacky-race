@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerOfMass: {fileID: 675349513212755505}
-  motorTorque: 500
+  motorTorque: 0
   minimumSpeed: 10
   maxSteer: 50
   brakeForce: 100
@@ -308,6 +308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db09f1f64ca5bdd468d497b7f6e6e6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeStillNeededToReset: 3
+  PositionChangeToResetThreshold: 0.01
 --- !u!114 &6403705283946693450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,6 +649,7 @@ MonoBehaviour:
   plungerForce: 500
   lineMaterial: {fileID: 2100000, guid: 047de4b2e064bc14aaab6142de761483, type: 2}
   initialTarget: {fileID: 1969826172943309657}
+  enableCrosshair: 1
 --- !u!1 &675349513212755506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,6 +1214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f4d688bbaeadd4f80d7bc4f582c1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
 --- !u!1 &6626861720541609859
 GameObject:
   m_ObjectHideFlags: 0

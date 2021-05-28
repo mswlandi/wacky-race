@@ -78990,6 +78990,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: 321go
+    clip: {fileID: 8300000, guid: e43c3e03407b9a44591a7a77fbaa049b, type: 3}
+    volume: 0.133
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &1949501254
 Transform:
   m_ObjectHideFlags: 0

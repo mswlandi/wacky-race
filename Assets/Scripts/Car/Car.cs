@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Car : Character
 {
-    public float motorTorque = 1500f;
+    public float motorTorque = 0f;
     public float minimumSpeed = 10f;
     public float maxSteer = 20f;
     public float brakeForce = 300f;
@@ -34,10 +34,12 @@ public class Car : Character
     {
         wheels = GetComponentsInChildren<Wheel>();
         source = GetComponent<AudioSource>();
+        
     }
 
     protected override void Run()
     {
+        StartCoroutine(waiter2());
         Speed = rigidbody.velocity.magnitude;
         UpdatePitch("CarEngine", Speed);
 
@@ -67,5 +69,11 @@ public class Car : Character
     {
         if (source == null) return;
         source.pitch =  Mathf.InverseLerp(0f, 30f, speed) + 1.3f;
+    }
+
+    IEnumerator waiter2()
+    {
+        yield return new WaitForSeconds(3);
+        motorTorque = 500f;
     }
 }

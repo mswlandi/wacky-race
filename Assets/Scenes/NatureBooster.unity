@@ -17068,6 +17068,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: 321go
+    clip: {fileID: 8300000, guid: e43c3e03407b9a44591a7a77fbaa049b, type: 3}
+    volume: 0.35
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &428679479
 Transform:
   m_ObjectHideFlags: 0
@@ -93248,7 +93254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerOfMass: {fileID: 9050076448839158435}
-  motorTorque: 500
+  motorTorque: 0
   minimumSpeed: 10
   maxSteer: 50
   brakeForce: 100
